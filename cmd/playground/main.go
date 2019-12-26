@@ -1,6 +1,8 @@
 package main
 
 import (
+	"game-playground/pkg/angle"
+	"game-playground/pkg/anglevelocity"
 	"game-playground/pkg/diagonalbounce"
 	"game-playground/pkg/diagonalnormalbounce"
 	"game-playground/pkg/horizontalbounce"
@@ -27,6 +29,8 @@ func main() {
 	hb := horizontalbounce.NewHorizontalBounce()
 	db := diagonalbounce.NewDiagonalBounce()
 	dnb := diagonalnormalbounce.NewDiagonalNormalBounce()
+	angle := angle.NewAngle(rl.Vector2{X: 300, Y: 300})
+	angleVelocity := anglevelocity.NewAngleVelocity(rl.Vector2{X: 10, Y: 310})
 	for !rl.WindowShouldClose() {
 
 		rl.ClearBackground(rl.Black)
@@ -50,11 +54,15 @@ func main() {
 		hb.Update()
 		db.Update()
 		dnb.Update()
+		angle.Update()
+		angleVelocity.Update()
 
 		vb.Draw()
 		hb.Draw()
 		db.Draw()
 		dnb.Draw()
+		angle.Draw()
+		angleVelocity.Draw()
 
 		rl.EndDrawing()
 
