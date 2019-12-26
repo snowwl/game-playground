@@ -1,12 +1,9 @@
-package main
+package diagonalbounce
 
-import (
-	rl "github.com/gen2brain/raylib-go/raylib"
-	"github.com/gen2brain/raylib-go/raymath"
-)
+import rl "github.com/gen2brain/raylib-go/raylib"
 
-// DiagonalNormalBounce - Displays a vertical bouncing square
-type DiagonalNormalBounce struct {
+// DiagonalBounce - Displays a vertical bouncing square
+type DiagonalBounce struct {
 	currentPosition rl.Vector2
 	startPosition   rl.Vector2
 	endPosition     rl.Vector2
@@ -14,19 +11,18 @@ type DiagonalNormalBounce struct {
 	speed           float32
 }
 
-// NewDiagonalNormalBounce - return a new vertical bounce
-func NewDiagonalNormalBounce() (b DiagonalNormalBounce) {
-	b.startPosition = rl.Vector2{X: 50, Y: 110}
-	b.endPosition = rl.Vector2{X: 140, Y: 200}
-	b.currentPosition = rl.Vector2{X: 50, Y: 110}
+// NewDiagonalBounce - return a new vertical bounce
+func NewDiagonalBounce() (b DiagonalBounce) {
+	b.startPosition = rl.Vector2{X: 10, Y: 110}
+	b.endPosition = rl.Vector2{X: 100, Y: 200}
+	b.currentPosition = rl.Vector2{X: 10, Y: 110}
 	b.velocity = rl.Vector2{X: 1, Y: 1}
-	raymath.Vector2Normalize(&b.velocity)
 	b.speed = float32(10.0)
 	return
 }
 
 // Update - calculate movement
-func (b *DiagonalNormalBounce) Update() {
+func (b *DiagonalBounce) Update() {
 	// Move object
 	b.currentPosition.X += float32(b.velocity.X) * float32(rl.GetFrameTime()) * b.speed
 	b.currentPosition.Y += float32(b.velocity.Y) * float32(rl.GetFrameTime()) * b.speed
@@ -43,7 +39,7 @@ func (b *DiagonalNormalBounce) Update() {
 }
 
 // Draw - render
-func (b *DiagonalNormalBounce) Draw() {
+func (b *DiagonalBounce) Draw() {
 	// Start
 	rl.DrawRectangle(
 		int32(b.startPosition.X), int32(b.startPosition.Y),
@@ -63,11 +59,11 @@ func (b *DiagonalNormalBounce) Draw() {
 }
 
 // SpeedUp - increase speed
-func (b *DiagonalNormalBounce) SpeedUp() {
+func (b *DiagonalBounce) SpeedUp() {
 	b.speed *= 2
 }
 
 // SpeedDown - descrease speed
-func (b *DiagonalNormalBounce) SpeedDown() {
+func (b *DiagonalBounce) SpeedDown() {
 	b.speed /= 2
 }

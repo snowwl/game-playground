@@ -1,9 +1,9 @@
-package main
+package horizontalbounce
 
 import rl "github.com/gen2brain/raylib-go/raylib"
 
-// VerticalBounce - Displays a vertical bouncing square
-type VerticalBounce struct {
+// HorizontalBounce - Displays a vertical bouncing square
+type HorizontalBounce struct {
 	currentPosition rl.Vector2
 	startPosition   rl.Vector2
 	endPosition     rl.Vector2
@@ -11,18 +11,18 @@ type VerticalBounce struct {
 	speed           float32
 }
 
-// NewVerticalBounce - return a new vertical bounce
-func NewVerticalBounce() (b VerticalBounce) {
-	b.startPosition = rl.Vector2{X: 10, Y: 10}
-	b.endPosition = rl.Vector2{X: 10, Y: 100}
-	b.currentPosition = rl.Vector2{X: 10, Y: 10}
-	b.velocity = rl.Vector2{X: 0, Y: 1}
+// NewHorizontalBounce - return a new vertical bounce
+func NewHorizontalBounce() (b HorizontalBounce) {
+	b.startPosition = rl.Vector2{X: 50, Y: 50}
+	b.endPosition = rl.Vector2{X: 150, Y: 50}
+	b.currentPosition = rl.Vector2{X: 50, Y: 50}
+	b.velocity = rl.Vector2{X: 1, Y: 0}
 	b.speed = float32(10.0)
 	return
 }
 
 // Update - calculate movement
-func (b *VerticalBounce) Update() {
+func (b *HorizontalBounce) Update() {
 	// Move object
 	b.currentPosition.X += float32(b.velocity.X) * float32(rl.GetFrameTime()) * b.speed
 	b.currentPosition.Y += float32(b.velocity.Y) * float32(rl.GetFrameTime()) * b.speed
@@ -39,7 +39,7 @@ func (b *VerticalBounce) Update() {
 }
 
 // Draw - render
-func (b *VerticalBounce) Draw() {
+func (b *HorizontalBounce) Draw() {
 	// Start
 	rl.DrawRectangle(
 		int32(b.startPosition.X), int32(b.startPosition.Y),
@@ -59,11 +59,11 @@ func (b *VerticalBounce) Draw() {
 }
 
 // SpeedUp - increase speed
-func (b *VerticalBounce) SpeedUp() {
+func (b *HorizontalBounce) SpeedUp() {
 	b.speed *= 2
 }
 
 // SpeedDown - descrease speed
-func (b *VerticalBounce) SpeedDown() {
+func (b *HorizontalBounce) SpeedDown() {
 	b.speed /= 2
 }

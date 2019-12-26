@@ -1,9 +1,12 @@
-package main
+package diagonalnormalbounce
 
-import rl "github.com/gen2brain/raylib-go/raylib"
+import (
+	rl "github.com/gen2brain/raylib-go/raylib"
+	"github.com/gen2brain/raylib-go/raymath"
+)
 
-// DiagonalBounce - Displays a vertical bouncing square
-type DiagonalBounce struct {
+// DiagonalNormalBounce - Displays a vertical bouncing square
+type DiagonalNormalBounce struct {
 	currentPosition rl.Vector2
 	startPosition   rl.Vector2
 	endPosition     rl.Vector2
@@ -11,18 +14,19 @@ type DiagonalBounce struct {
 	speed           float32
 }
 
-// NewDiagonalBounce - return a new vertical bounce
-func NewDiagonalBounce() (b DiagonalBounce) {
-	b.startPosition = rl.Vector2{X: 10, Y: 110}
-	b.endPosition = rl.Vector2{X: 100, Y: 200}
-	b.currentPosition = rl.Vector2{X: 10, Y: 110}
+// NewDiagonalNormalBounce - return a new vertical bounce
+func NewDiagonalNormalBounce() (b DiagonalNormalBounce) {
+	b.startPosition = rl.Vector2{X: 50, Y: 110}
+	b.endPosition = rl.Vector2{X: 140, Y: 200}
+	b.currentPosition = rl.Vector2{X: 50, Y: 110}
 	b.velocity = rl.Vector2{X: 1, Y: 1}
+	raymath.Vector2Normalize(&b.velocity)
 	b.speed = float32(10.0)
 	return
 }
 
 // Update - calculate movement
-func (b *DiagonalBounce) Update() {
+func (b *DiagonalNormalBounce) Update() {
 	// Move object
 	b.currentPosition.X += float32(b.velocity.X) * float32(rl.GetFrameTime()) * b.speed
 	b.currentPosition.Y += float32(b.velocity.Y) * float32(rl.GetFrameTime()) * b.speed
@@ -39,7 +43,7 @@ func (b *DiagonalBounce) Update() {
 }
 
 // Draw - render
-func (b *DiagonalBounce) Draw() {
+func (b *DiagonalNormalBounce) Draw() {
 	// Start
 	rl.DrawRectangle(
 		int32(b.startPosition.X), int32(b.startPosition.Y),
@@ -59,11 +63,11 @@ func (b *DiagonalBounce) Draw() {
 }
 
 // SpeedUp - increase speed
-func (b *DiagonalBounce) SpeedUp() {
+func (b *DiagonalNormalBounce) SpeedUp() {
 	b.speed *= 2
 }
 
 // SpeedDown - descrease speed
-func (b *DiagonalBounce) SpeedDown() {
+func (b *DiagonalNormalBounce) SpeedDown() {
 	b.speed /= 2
 }
